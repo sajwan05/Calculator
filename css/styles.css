@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+@font-face {
+        font-family: "My Font";
+
+        src: url(" ../fonts/digital.ttf") format("truetype");
+    }
+
 .wrapper {
     inline-size: 560px;
     margin: 0 auto;
@@ -22,6 +28,16 @@
     text-align: center;
 
     
+}
+
+.display {
+
+    font-family: "My Font";
+
+    font-size: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .wrapper .buttons > * {

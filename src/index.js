@@ -1,3 +1,6 @@
+const display = document.querySelector(".display");
+const buttons = document.querySelector(".buttons");
+
 // Basic Math functions
 
 function sum(a, b){
@@ -21,7 +24,7 @@ function division(a, b){
 }
 
 function calculator(number1, operation, number2){
-    
+
 }
 
 function operate(operator, num1, num2){
