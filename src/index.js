@@ -47,7 +47,7 @@ let secondNumber = null;
 let operator = null;
 let result = 0;
 
-
+let operation = null;
 
 buttons.addEventListener("click", (e) => {
 
@@ -83,9 +83,13 @@ buttons.addEventListener("click", (e) => {
             operator = null;
     }
 
-    
+    operation = op;
 
-    handlesOperators(op);
+   
+   if(currentNumber){
+    handlesOperators(operation);
+   }
+   
 
 });
 
@@ -96,7 +100,7 @@ function handlesOperators(op){
         if(firstNumber === null){
             firstNumber = parseInt(currentNumber);
             operator = op;
-            currentNumber = "";
+            
         }else{
             secondNumber = parseInt(currentNumber);
             result = operate(operator, firstNumber, secondNumber);
@@ -104,8 +108,10 @@ function handlesOperators(op){
             firstNumber = result;
             display.textContent = firstNumber;
             operator = op;
-            currentNumber = "";
+            
         }
+
+        currentNumber = "";
     }
 }
 
@@ -117,17 +123,21 @@ const equal = document.querySelector(".equal");
 
 equal.addEventListener("click", (e) => {
 
-    secondNumber = parseInt(currentNumber);
-    display.textContent += ` ${secondNumber}`;
+    if(currentNumber){
+        secondNumber = parseInt(currentNumber);
+        display.textContent += ` ${secondNumber}`;
+        
+        result = operate(operator, firstNumber, secondNumber);
+
+        display.textContent = `${result}`;
+        currentNumber = result;
+        firstNumber = null;
+        operator = null;
+        secondNumber = null;
+
+    }
     
-    result = operate(operator, firstNumber, secondNumber);
-
-    display.textContent = `${result}`;
-
-    currentNumber = result;
-    firstNumber = null;
-    operator = null;
-    secondNumber = null;
+    
 });
 
 
