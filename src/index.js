@@ -130,7 +130,7 @@ equal.addEventListener("click", (e) => {
         result = operate(operator, firstNumber, secondNumber);
 
         display.textContent = `${result}`;
-        currentNumber = "";
+        currentNumber = result;
         firstNumber = null;
         operator = null;
         secondNumber = null;
