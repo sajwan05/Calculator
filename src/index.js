@@ -41,15 +41,15 @@ function operate(operator, num1, num2){
 
 let currentNumber = "";
 let firstNumber = null;
-let lastNumber = null;
+let secondNumber = null;
 let operator = null;
+let result = 0;
 
 
 
 buttons.addEventListener("click", (e) => {
 
     const value = e.target.textContent.toLowerCase();
-    let number;
     let op;
 
     switch(value) {
@@ -63,25 +63,25 @@ buttons.addEventListener("click", (e) => {
         case "8":
         case "9":
         case "0":
-            number = value;
-            display.textContent = number;
+            currentNumber += value;
+            display.textContent = currentNumber;
             break;
         case "+":
         case "x":
         case "-":
         case "/":
             op = value;
+            display.textContent += ` ${op}`;
             break;
         case "clear":
             display.textContent = "0";
+            currentNumber = "";
             firstNumber = null;
             secondNumber = null;
-            operation = null;
+            operator = null;
     }
 
-    if(!Number.isNaN(parseInt(value))){
-        currentNumber += number;
-    }
+    
 
     handlesOperators(op);
 
@@ -91,9 +91,19 @@ function handlesOperators(op){
     if(op === "+" || op === "-" ||
         op === "x" || op === "/" 
     ){
-        firstNumber = parseInt(currentNumber);
-        currentNumber = "";
-        operator = op;
+        if(firstNumber === null){
+            firstNumber = parseInt(currentNumber);
+            operator = op;
+            currentNumber = "";
+        }else{
+            secondNumber = parseInt(currentNumber);
+            result = operate(operator, firstNumber, secondNumber);
+
+            firstNumber = result;
+            display.textContent = firstNumber;
+            operator = op;
+            currentNumber = "";
+        }
     }
 }
 
@@ -106,19 +116,16 @@ const equal = document.querySelector(".equal");
 equal.addEventListener("click", (e) => {
 
     secondNumber = parseInt(currentNumber);
+    display.textContent += ` ${secondNumber}`;
     
-    let result = operate(operator, firstNumber, secondNumber);
+    result = operate(operator, firstNumber, secondNumber);
 
-    display.textContent = `${firstNumber} ${operator} ${secondNumber} = ${result}`;
+    display.textContent = `${result}`;
 
-    currentNumber = "";
+    currentNumber = result;
     firstNumber = null;
     operator = null;
     secondNumber = null;
-
-    console.log(firstNumber);
-    console.log(secondNumber);
-    console.log(operator);
 });
 
 
