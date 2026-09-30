@@ -19,7 +19,8 @@ function product(a, b){
 }
 
 function division(a, b){
-     if(typeof a !== "number" || typeof b !== "number" || b === 0) return "Oops";
+     if(typeof a !== "number" || typeof b !== "number" || b === 0) 
+        return "OMG dividing with zero??";
      let answer = parseFloat((a/b).toFixed(2));
     return answer;
 }
