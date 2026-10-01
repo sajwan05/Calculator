@@ -36,8 +36,6 @@ function operate(operator, num1, num2){
             return product(num1, num2);
         case "/":
             return division(num1, num2);
-        default:
-            return `Sorry! Operation ${operator} is not available`;
     }
 }
 
@@ -46,7 +44,6 @@ let firstNumber = null;
 let secondNumber = null;
 let operator = null;
 let result = 0;
-
 let operation = null;
 
 buttons.addEventListener("click", (e) => {
@@ -73,7 +70,7 @@ buttons.addEventListener("click", (e) => {
         case "-":
         case "/":
             op = value;
-            display.textContent += ` ${op}`;
+            display.textContent = ` ${op}`;
             break;
         case "clear":
             display.textContent = "0";
@@ -81,15 +78,17 @@ buttons.addEventListener("click", (e) => {
             firstNumber = null;
             secondNumber = null;
             operator = null;
+            operation = null;
     }
 
     operation = op;
-
+    
    
    if(currentNumber){
     handlesOperators(operation);
+   }else if (!currentNumber && firstNumber !== null && operation){
+    operator = operation;
    }
-   
 
 });
 
@@ -103,11 +102,14 @@ function handlesOperators(op){
             
         }else{
             secondNumber = parseInt(currentNumber);
+            display.textContent += ` ${secondNumber}`;
+            
             result = operate(operator, firstNumber, secondNumber);
+            operator = op;
 
             firstNumber = result;
             display.textContent = firstNumber;
-            operator = op;
+           
             
         }
 
@@ -125,13 +127,14 @@ equal.addEventListener("click", (e) => {
 
     if(currentNumber){
         secondNumber = parseInt(currentNumber);
-        display.textContent += ` ${secondNumber}`;
+        display.textContent = ` ${secondNumber}`;
         
         result = operate(operator, firstNumber, secondNumber);
-
-        display.textContent = `${result}`;
+        display.textContent = result;
+        
         currentNumber = result;
         firstNumber = null;
+       
         operator = null;
         secondNumber = null;
 
